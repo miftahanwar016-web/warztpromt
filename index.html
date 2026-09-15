@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08050f">
+<title>WARZT PROMT</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#08050f;--card:rgba(23,15,39,.88);--card2:rgba(15,10,26,.95);--primary:#8b5cf6;--primary2:#a855f7;--light:#c084fc;--text:#f8f7ff;--muted:#948ba2;--border:rgba(168,85,247,.18);--green:#4ade80;--red:#fb7185;--yellow:#facc15}
+body{margin:0;color:var(--text);background:radial-gradient(circle at 10% 0%,rgba(139,92,246,.20),transparent 30%),radial-gradient(circle at 90% 20%,rgba(168,85,247,.12),transparent 28%),var(--bg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{max-width:1150px;margin:auto;min-height:100vh;padding-bottom:100px}
+header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:rgba(8,5,15,.85);backdrop-filter:blur(22px);border-bottom:1px solid var(--border)}
+.logo{font-size:22px;font-weight:950;letter-spacing:-1px}.logo span{color:var(--light)}.header-sub{color:#766d81;font-size:8px;margin-top:3px;letter-spacing:1px}.header-right{display:flex;align-items:center;gap:8px}
+.badge{padding:7px 11px;border-radius:999px;font-size:8px;font-weight:900;color:#decaff;background:rgba(139,92,246,.12);border:1px solid var(--border)}.icon-btn{width:36px;height:36px;border-radius:11px;color:white;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+main{padding:20px}.hero{padding:27px;border-radius:24px;border:1px solid rgba(192,132,252,.25);background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(88,28,135,.17)),rgba(18,12,32,.85);box-shadow:0 25px 70px rgba(0,0,0,.35)}
+.hero h1{margin:0 0 8px;font-size:28px;background:linear-gradient(90deg,#fff,#d8b4fe,#a78bfa);-webkit-background-clip:text;color:transparent}.hero p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+.online{display:inline-flex;align-items:center;gap:7px;margin-top:15px;padding:7px 10px;border-radius:99px;color:#86efac;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.14);font-size:8px;font-weight:900}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.search{width:100%;margin:18px 0 10px;padding:14px;color:white;background:rgba(17,11,29,.8);border:1px solid var(--border);border-radius:13px;outline:none}.filter-row{display:flex;gap:8px;overflow:auto;padding-bottom:5px}
+.filter,.tab,.login-tab{white-space:nowrap;padding:8px 11px;color:#8c8398;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:9px;font-size:8px;font-weight:900}.filter.active,.tab.active,.login-tab.active{color:white;background:linear-gradient(135deg,#7c3aed,#a855f7)}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:19px 0 12px}.section-title h2,.panel h2{margin:0;font-size:16px}.count{color:#756d82;font-size:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:15px}.card{overflow:hidden;padding:15px;border-radius:19px;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,.28)}
+.card-img{width:100%;height:165px;object-fit:cover;border-radius:13px;margin-bottom:10px;cursor:zoom-in;border:1px solid var(--border)}.no-image{height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;border-radius:13px;color:#665d73;background:rgba(255,255,255,.025);border:1px dashed var(--border);font-size:9px}
+.tag{display:inline-block;padding:5px 8px;color:#d8b4fe;background:rgba(139,92,246,.10);border:1px solid var(--border);border-radius:99px;font-size:7px;font-weight:900}.card h3{margin:9px 0 5px;font-size:15px}.card-text{color:#a29aaf;font-size:10px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap}.card-meta{display:flex;justify-content:space-between;margin-top:9px;color:#665d73;font-size:7px}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.btn{padding:9px 11px;border-radius:9px;border:1px solid transparent;font-size:8px;font-weight:900}.primary{color:white;background:linear-gradient(135deg,#7c3aed,#a855f7)}.secondary{color:#c7bfd1;background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.07)}.danger{color:#fda4af;background:rgba(244,63,94,.08);border-color:rgba(244,63,94,.15)}
+.panel{margin-top:16px;padding:18px;border-radius:20px;background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{width:100%;padding:12px;color:white;background:rgba(7,4,13,.75);border:1px solid var(--border);border-radius:11px;outline:none}textarea.field{min-height:130px;resize:vertical}.full{grid-column:1/-1}.upload{padding:15px;text-align:center;color:#81788d;border:1px dashed var(--border);border-radius:13px;font-size:9px}.preview{display:none;width:100%;max-height:220px;object-fit:cover;margin-top:10px;border-radius:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat{padding:14px 8px;text-align:center;border-radius:14px;background:rgba(139,92,246,.07);border:1px solid var(--border)}.stat b{display:block;color:#d8b4fe;font-size:20px}.stat span{color:#756d82;font-size:7px}
+.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:15px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:8px}th{padding:10px;text-align:left;color:#776e84;background:rgba(255,255,255,.025)}td{padding:10px;color:#d7d0df;border-top:1px solid rgba(168,85,247,.09)}code{color:#d8b4fe;background:rgba(139,92,246,.09);padding:4px 6px;border-radius:6px}.active-status{color:#86efac}.expired{color:#fb7185}.disabled{color:#facc15}
+.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(1150px,100%);height:75px;z-index:100;display:flex;align-items:center;justify-content:space-around;background:rgba(8,5,15,.94);backdrop-filter:blur(25px);border-top:1px solid var(--border)}.nav{min-width:55px;padding:7px;color:#716a7d;background:none;border:0;border-radius:11px;font-size:7px;font-weight:900}.nav-icon{display:block;margin-bottom:3px;font-size:19px}.nav.active{color:#d8b4fe;background:rgba(139,92,246,.11)}
+.modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(9px)}.modal.show{display:flex}.modal-box{width:min(600px,100%);max-height:92vh;overflow:auto;padding:20px;border-radius:21px;background:linear-gradient(145deg,#1d1430,#090610);border:1px solid rgba(168,85,247,.30);box-shadow:0 40px 100px rgba(0,0,0,.7)}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.modal-head h2{margin:0;font-size:17px}.close{width:35px;height:35px;color:white;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:50%}.detail-img{width:100%;max-height:390px;object-fit:contain;border-radius:13px;background:#050308}.prompt-box{margin:10px 0;padding:13px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(168,85,247,.10)}.prompt-label{color:#9b8eac;font-size:7px;font-weight:900;margin-bottom:7px;text-transform:uppercase}.prompt-content{color:#ddd6e7;font-size:10px;line-height:1.6;white-space:pre-wrap}
+.login{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 15% 10%,rgba(139,92,246,.25),transparent 30%),#08050f}.login-box{width:min(410px,100%);padding:27px;border-radius:24px;background:linear-gradient(145deg,#1d1430,#0b0712);border:1px solid rgba(168,85,247,.28);box-shadow:0 40px 100px rgba(0,0,0,.6)}.login-logo{text-align:center;font-size:28px;font-weight:950}.login-logo span{color:#c084fc}.login-sub{margin:5px 0 22px;text-align:center;color:#756d82;font-size:8px;letter-spacing:1px}.login-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:13px}.error{min-height:19px;margin:8px 0;color:#fb7185;font-size:8px;text-align:center}.info{padding:12px;margin-top:10px;color:#938a9f;background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:11px;font-size:9px;line-height:1.55}.toast{position:fixed;left:50%;bottom:88px;z-index:2000;opacity:0;transform:translate(-50%,20px);padding:11px 15px;color:white;background:#1c1330;border:1px solid rgba(168,85,247,.30);border-radius:11px;font-size:9px;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+.sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#facc15;margin-right:5px}.sync-ok{background:#4ade80}.sync-bad{background:#fb7185}
+@media(max-width:650px){main{padding:15px}.hero{padding:22px}.hero h1{font-size:23px}.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.stats{grid-template-columns:repeat(2,1fr)}.header-sub{display:none}table,thead,tbody,tr,td{display:block;width:100%}thead{display:none}tr{padding:10px;margin-bottom:9px;border-radius:14px;background:rgba(27,19,43,.85);border:1px solid var(--border)}td{display:flex;justify-content:space-between;gap:10px;border:0;padding:6px 0}td:before{color:#716a7d;font-size:7px;font-weight:900}td:nth-child(1):before{content:"NAMA"}td:nth-child(2):before{content:"KODE"}td:nth-child(3):before{content:"DURASI"}td:nth-child(4):before{content:"STATUS"}td:nth-child(5):before{content:"AKSI"}}
+</style>
+</head>
+<body>
+<div id="loginScreen" class="login"><div class="login-box">
+<div class="login-logo">WARZT <span>PROMT</span></div><div class="login-sub">PREMIUM PROMPT MANAGEMENT SYSTEM</div>
+<div class="login-tabs"><button id="userTab" class="login-tab active" onclick="loginMode('user')">USER</button><button id="adminTab" class="login-tab" onclick="loginMode('admin')">ADMIN</button></div>
+<b id="loginTitle" style="font-size:11px">User Login</b>
+<input id="loginCode" class="field" style="margin-top:8px" placeholder="Masukkan kode user">
+<div id="loginError" class="error"></div><button class="btn primary" style="width:100%" onclick="login()">LOGIN</button>
+<div class="info">Sistem keamanan WARZT PROMT aktif. Data lokal otomatis disimpan dan dapat disinkronkan ke Telegram melalui server.</div>
+</div></div>
+
+<div id="app" class="app hidden">
+<header><div><div class="logo">WARZT <span>PROMT</span></div><div class="header-sub">PROMPT MANAGEMENT SYSTEM</div></div>
+<div class="header-right"><span id="roleBadge" class="badge">USER</span><button class="icon-btn" onclick="openModal('infoModal')">i</button></div></header>
+<main>
+<section id="homePage"><div class="hero"><h1>WARZT PROMT</h1><p>Koleksi prompt premium dengan gambar referensi, pencarian cepat, favorite dan sistem manajemen terintegrasi.</p><div class="online"><span class="dot"></span>SYSTEM ONLINE</div></div>
+<input id="search" class="search" placeholder="Cari prompt..." oninput="render()"><div id="filters" class="filter-row"></div>
+<div class="section-title"><h2>Prompt Library</h2><span id="promptCount" class="count">0 Prompt</span></div><div id="grid" class="grid"></div></section>
+
+<section id="addPage" class="hidden"><div class="panel"><h2>Tambah Prompt</h2><div class="form-grid">
+<input id="title" class="field full" placeholder="Judul prompt"><input id="category" class="field" placeholder="Kategori"><input id="tags" class="field" placeholder="Tag">
+<textarea id="positive" class="field full" placeholder="Positive Prompt"></textarea><textarea id="negative" class="field full" placeholder="Negative Prompt"></textarea>
+<div class="upload full"><div>Upload gambar referensi</div><input id="image" type="file" accept="image/*" onchange="preview(event)"><img id="preview" class="preview"></div>
+<button class="btn primary full" onclick="addPrompt()">SIMPAN PROMPT</button></div></div></section>
+
+<section id="favoritePage" class="hidden"><div class="section-title"><h2>Favorite</h2><span id="favCount" class="count">0</span></div><div id="favGrid" class="grid"></div></section>
+
+<section id="adminPage" class="hidden"><div class="panel"><h2>Admin Dashboard</h2><div class="stats">
+<div class="stat"><b id="sUsers">0</b><span>USER</span></div><div class="stat"><b id="sActive">0</b><span>AKTIF</span></div><div class="stat"><b id="sPrompts">0</b><span>PROMPT</span></div><div class="stat"><b id="sCopies">0</b><span>COPY</span></div></div>
+<div class="info" style="margin-top:12px"><span id="syncIndicator" class="sync-dot"></span><span id="syncText">Cloud sync belum dikonfigurasi.</span></div></div>
+<div class="panel"><div class="tabs">
+<button class="tab active" onclick="adminTab('users',this)">USER</button><button class="tab" onclick="adminTab('create',this)">BUAT USER</button><button class="tab" onclick="adminTab('notice',this)">PENGUMUMAN</button><button class="tab" onclick="adminTab('security',this)">SECURITY</button><button class="tab" onclick="adminTab('backup',this)">BACKUP</button><button class="tab" onclick="adminTab('cloud',this)">TELEGRAM</button></div>
+<div id="adminUsers"><h2>Manajemen User</h2><div class="table-wrap"><table><thead><tr><th>Nama</th><th>Kode</th><th>Durasi</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="userTable"></tbody></table></div></div>
+<div id="adminCreate" class="hidden"><h2>Buat User</h2><div class="form-grid"><input id="userName" class="field" placeholder="Nama user"><input id="userCode" class="field" placeholder="Kode user"><select id="duration" class="field"><option value="7">7 Hari</option><option value="14">14 Hari</option><option value="30">30 Hari</option><option value="60">60 Hari</option><option value="90">90 Hari</option><option value="365">365 Hari</option><option value="0">Unlimited</option><option value="custom">Custom</option></select><input id="customDays" class="field" type="number" placeholder="Custom hari"><button class="btn primary full" onclick="createUser()">GENERATE USER</button></div></div>
+<div id="adminNotice" class="hidden"><h2>Pengumuman</h2><textarea id="noticeText" class="field" placeholder="Pesan untuk semua user..."></textarea><button class="btn primary" style="margin-top:8px" onclick="saveNotice()">TERBITKAN</button></div>
+<div id="adminSecurity" class="hidden"><h2>Admin Security</h2><input id="newAdmin" class="field" placeholder="Kode admin baru"><button class="btn primary" style="margin-top:8px" onclick="changeAdmin()">GANTI KODE ADMIN</button></div>
+<div id="adminBackup" class="hidden"><h2>Backup & Restore</h2><button class="btn primary" onclick="backup()">BACKUP LOKAL</button><label class="btn secondary" style="display:inline-block;margin-left:5px">RESTORE DATA<input type="file" accept=".json" hidden onchange="restore(event)"></label><button class="btn secondary" style="margin-left:5px" onclick="syncNow()">SYNC KE TELEGRAM</button><button class="btn secondary" style="margin-left:5px" onclick="pullNow()">AMBIL DARI TELEGRAM</button><div class="info">Local storage tetap menjadi cache. Telegram dipakai sebagai cloud backup melalui backend.</div></div>
+<div id="adminCloud" class="hidden"><h2>Telegram Cloud</h2><div class="info">Backend URL menentukan server yang memiliki Telegram Bot Token. Token bot tidak pernah dikirim ke browser.</div><input id="apiUrl" class="field" placeholder="https://domain-backend-anda.example.com" style="margin-top:10px"><input id="cloudKey" class="field" placeholder="Cloud key / secret" style="margin-top:10px"><div class="actions"><button class="btn primary" onclick="saveCloudConfig()">SIMPAN KONFIG</button><button class="btn secondary" onclick="testCloud()">TEST KONEKSI</button></div></div>
+</div></section>
+</main>
+<nav class="bottom"><button class="nav active" onclick="navigate('homePage',this)"><span class="nav-icon">⌂</span>HOME</button><button id="addNav" class="nav" onclick="navigate('addPage',this)"><span class="nav-icon">＋</span>TAMBAH</button><button class="nav" onclick="navigate('favoritePage',this)"><span class="nav-icon">★</span>FAVORITE</button><button id="adminNav" class="nav hidden" onclick="navigate('adminPage',this)"><span class="nav-icon">⚙</span>ADMIN</button><button class="nav" onclick="logout()"><span class="nav-icon">↪</span>LOGOUT</button></nav>
+</div>
+
+<div id="detailModal" class="modal"><div class="modal-box"><div class="modal-head"><h2 id="detailTitle">Prompt</h2><button class="close" onclick="closeModal('detailModal')">×</button></div><img id="detailImage" class="detail-img hidden"><div class="prompt-box"><div class="prompt-label">Positive Prompt</div><div id="detailPositive" class="prompt-content"></div></div><div class="prompt-box"><div class="prompt-label">Negative Prompt</div><div id="detailNegative" class="prompt-content"></div></div><button id="detailCopy" class="btn primary" style="width:100%">COPY POSITIVE PROMPT</button></div></div>
+<div id="infoModal" class="modal"><div class="modal-box"><div class="modal-head"><h2>WARZT PROMT</h2><button class="close" onclick="closeModal('infoModal')">×</button></div><div class="info"><b>Persistent Data</b><br>Data disimpan di browser dan dapat dicadangkan ke Telegram melalui backend.</div><div class="info"><b>Access Control</b><br>Admin mengontrol user, kode login dan masa aktif.</div><div class="info"><b>Cloud</b><br>Telegram dipakai sebagai media backup/sinkronisasi, bukan sebagai database publik.</div></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const DATA_VERSION=2, DEFAULT_ADMIN="WARZT-ADMIN", API_KEY_NAME="warzt_cloud_key", API_URL_NAME="warzt_api_url";
+let adminCode=localStorage.getItem("warzt_admin")||DEFAULT_ADMIN;
+let users=readJSON("warzt_users",[]);
+let prompts=readJSON("warzt_prompts",[]);
+let notice=localStorage.getItem("warzt_notice")||"";
+let currentUser=localStorage.getItem("warzt_session")||"";
+let mode="user", categoryFilter="ALL", toastTimer;
+let cloud={url:localStorage.getItem(API_URL_NAME)||"",key:localStorage.getItem(API_KEY_NAME)||""};
+
+function readJSON(k,f){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f))}catch{return f}}
+function save(){
+ localStorage.setItem("warzt_users",JSON.stringify(users));
+ localStorage.setItem("warzt_prompts",JSON.stringify(prompts));
+ localStorage.setItem("warzt_notice",notice);
+ localStorage.setItem("warzt_data_version",DATA_VERSION);
+}
+function payload(){return {version:DATA_VERSION,adminCode,users,prompts,notice,savedAt:new Date().toISOString()}}
+function applyData(data){
+ if(!data||!Array.isArray(data.users)||!Array.isArray(data.prompts))throw Error("invalid");
+ users=data.users;prompts=data.prompts;notice=data.notice||"";
+ if(data.adminCode){adminCode=data.adminCode;localStorage.setItem("warzt_admin",adminCode)}
+ save();render();renderFavorites();renderUsers();updateStats();
+}
+function loginMode(type){mode=type;userTab.classList.toggle("active",type==="user");adminTab.classList.toggle("active",type==="admin");loginTitle.textContent=type==="admin"?"Admin Login":"User Login";loginCode.placeholder=type==="admin"?"Masukkan kode admin":"Masukkan kode user";loginError.textContent=""}
+function login(){
+ const code=loginCode.value.trim();if(!code){loginError.textContent="Kode wajib diisi.";return}
+ if(mode==="admin"){if(code!==adminCode){loginError.textContent="Kode admin salah.";return}currentUser="ADMIN"}
+ else{const u=users.find(x=>x.code===code);if(!u){loginError.textContent="Kode user tidak ditemukan.";return}if(u.disabled){loginError.textContent="Akun user dinonaktifkan admin.";return}if(u.expires!==0&&Date.now()>u.expires){loginError.textContent="Masa aktif user sudah habis.";return}currentUser=u.code}
+ localStorage.setItem("warzt_session",currentUser);openApp()
+}
+function openApp(){
+ loginScreen.classList.add("hidden");app.classList.remove("hidden");const admin=currentUser==="ADMIN";roleBadge.textContent=admin?"ADMIN":"USER";adminNav.classList.toggle("hidden",!admin);addNav.classList.toggle("hidden",!admin);render();renderFavorites();updateStats();if(admin){renderUsers();updateCloudUI()}else if(notice)setTimeout(()=>alert("PENGUMUMAN ADMIN\n\n"+notice),400)
+}
+function restoreSession(){if(!currentUser)return;if(currentUser==="ADMIN"){openApp();return}const u=users.find(x=>x.code===currentUser);if(!u||u.disabled||(u.expires!==0&&Date.now()>u.expires)){logout(false);return}openApp()}
+function logout(show=true){currentUser="";localStorage.removeItem("warzt_session");app.classList.add("hidden");loginScreen.classList.remove("hidden");loginCode.value="";if(show)toast("Berhasil logout.")}
+function navigate(page,button){document.querySelectorAll("main > section").forEach(x=>x.classList.add("hidden"));document.getElementById(page).classList.remove("hidden");document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));if(button)button.classList.add("active");render();if(page==="favoritePage")renderFavorites();if(page==="adminPage"){renderUsers();updateStats()}}
+function preview(e){const file=e.target.files[0];if(!file)return;if(file.size>4*1024*1024){toast("Gambar maksimal 4MB.");e.target.value="";return}const r=new FileReader();r.onload=x=>{previewImg=x.target.result;previewEl.src=x.target.result;previewEl.style.display="block"};r.readAsDataURL(file)}
+const previewEl=document.getElementById("preview");let previewImg="";
+function addPrompt(){
+ if(currentUser!=="ADMIN"){toast("Hanya admin yang dapat menambahkan prompt.");return}
+ const titleEl=document.getElementById("title"),categoryEl=document.getElementById("category"),tagsEl=document.getElementById("tags"),positiveEl=document.getElementById("positive"),negativeEl=document.getElementById("negative");
+ const title=titleEl.value.trim(),category=categoryEl.value.trim()||"General",tags=tagsEl.value.trim(),positive=positiveEl.value.trim(),negative=negativeEl.value.trim();
+ if(!title||!positive){toast("Judul dan Positive Prompt wajib diisi.");return}
+ prompts.unshift({id:crypto.randomUUID?crypto.randomUUID():Date.now().toString(),title,category,tags,positive,negative,image:previewImg,favorite:false,copies:0,created:Date.now()});
+ save();[titleEl,categoryEl,tagsEl,positiveEl,negativeEl].forEach(x=>x.value="");image.value="";previewImg="";previewEl.src="";previewEl.style.display="none";toast("Prompt berhasil ditambahkan.");render();updateStats();syncNow(true)
+}
+function renderFilters(){filters.innerHTML=["ALL",...new Set(prompts.map(p=>p.category||"General"))].map(c=>`<button class="filter ${categoryFilter===c?"active":""}" onclick="setCategory(${JSON.stringify(c)})">${escapeHTML(c)}</button>`).join("")}
+function setCategory(c){categoryFilter=c;render()}
+function render(){
+ renderFilters();const q=(search?.value||"").toLowerCase();let data=prompts;
+ if(categoryFilter!=="ALL")data=data.filter(p=>p.category===categoryFilter);
+ if(q)data=data.filter(p=>(p.title+" "+p.category+" "+p.tags+" "+p.positive).toLowerCase().includes(q));
+ promptCount.textContent=data.length+" Prompt";grid.innerHTML=data.length?data.map(card).join(""):`<div style="color:#756d82">Belum ada prompt.</div>`
+}
+function card(p){return `<article class="card">${p.image?`<img class="card-img" src="${safeURL(p.image)}" onclick="detail('${p.id}')">`:`<div class="no-image">NO IMAGE</div>`}<span class="tag">${escapeHTML(p.category)}</span><h3>${escapeHTML(p.title)}</h3><div class="card-text">${escapeHTML(p.positive)}</div><div class="card-meta"><span>COPY: ${p.copies||0}</span><span>${p.favorite?"★ FAVORITE":""}</span></div><div class="actions"><button class="btn primary" onclick="copyPrompt('${p.id}')">COPY</button><button class="btn secondary" onclick="detail('${p.id}')">DETAIL</button><button class="btn secondary" onclick="favorite('${p.id}')">${p.favorite?"★":"☆"}</button>${currentUser==="ADMIN"?`<button class="btn secondary" onclick="editPrompt('${p.id}')">EDIT</button><button class="btn danger" onclick="deletePrompt('${p.id}')">HAPUS</button>`:""}</div></article>`}
+function detail(id){const p=prompts.find(x=>x.id===id);if(!p)return;detailTitle.textContent=p.title;if(p.image){detailImage.src=safeURL(p.image);detailImage.classList.remove("hidden")}else detailImage.classList.add("hidden");detailPositive.textContent=p.positive;detailNegative.textContent=p.negative||"Tidak ada negative prompt.";detailCopy.onclick=()=>copyPrompt(p.id);openModal("detailModal")}
+async function copyPrompt(id){const p=prompts.find(x=>x.id===id);if(!p)return;p.copies=(p.copies||0)+1;save();const text=p.positive+(p.negative?"\n\nNegative Prompt:\n"+p.negative:"");try{await navigator.clipboard.writeText(text);toast("Prompt berhasil dicopy.")}catch{const a=document.createElement("textarea");a.value=text;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();toast("Prompt berhasil dicopy.")}render();updateStats();syncNow(true)}
+function favorite(id){const p=prompts.find(x=>x.id===id);if(!p)return;p.favorite=!p.favorite;save();render();renderFavorites();syncNow(true)}
+function renderFavorites(){const data=prompts.filter(p=>p.favorite);favCount.textContent=data.length+" Favorite";favGrid.innerHTML=data.length?data.map(card).join(""):`<div style="color:#756d82">Belum ada favorite.</div>`}
+function editPrompt(id){const p=prompts.find(x=>x.id===id);if(!p)return;const title=prompt("Judul:",p.title);if(title===null)return;const positive=prompt("Positive Prompt:",p.positive);if(positive===null)return;const negative=prompt("Negative Prompt:",p.negative||"");if(negative===null)return;p.title=title;p.positive=positive;p.negative=negative;save();render();toast("Prompt diperbarui.");syncNow(true)}
+function deletePrompt(id){if(!confirm("Hapus prompt ini?"))return;prompts=prompts.filter(x=>x.id!==id);save();render();renderFavorites();updateStats();toast("Prompt dihapus.");syncNow(true)}
+function createUser(){if(currentUser!=="ADMIN")return;const name=userName.value.trim();let code=userCode.value.trim();const type=duration.value,custom=Number(customDays.value);if(!name){toast("Nama wajib diisi.");return}if(!code)code="WARZT-"+Math.random().toString(36).substring(2,9).toUpperCase();if(users.some(u=>u.code===code)){toast("Kode sudah digunakan.");return}let days=type==="custom"?custom:Number(type);if(type==="custom"&&(!days||days<1)){toast("Jumlah hari tidak valid.");return}users.push({id:Date.now().toString(),name,code,created:Date.now(),expires:days===0?0:Date.now()+days*86400000,disabled:false});save();renderUsers();updateStats();userName.value="";userCode.value="";toast("User dibuat: "+code);syncNow(true)}
+function renderUsers(){userTable.innerHTML=users.length?users.map(u=>{const expired=u.expires!==0&&Date.now()>u.expires,status=u.disabled?"NONAKTIF":expired?"EXPIRED":"AKTIF",cls=u.disabled?"disabled":expired?"expired":"active-status";return `<tr><td>${escapeHTML(u.name)}</td><td><code>${escapeHTML(u.code)}</code></td><td>${u.expires===0?"Unlimited":dateFmt(u.expires)}</td><td class="${cls}">${status}</td><td><button class="btn secondary" onclick="toggleUser('${u.id}')">${u.disabled?"AKTIFKAN":"NONAKTIFKAN"}</button> <button class="btn danger" onclick="deleteUser('${u.id}')">HAPUS</button></td></tr>`}).join(""):`<tr><td colspan="5">Belum ada user.</td></tr>`}
+function toggleUser(id){const u=users.find(x=>x.id===id);if(!u)return;u.disabled=!u.disabled;save();renderUsers();updateStats();toast(u.disabled?"User dinonaktifkan.":"User diaktifkan.");syncNow(true)}
+function deleteUser(id){const u=users.find(x=>x.id===id);if(!u)return;if(!confirm("Hapus user "+u.name+"?"))return;users=users.filter(x=>x.id!==id);save();renderUsers();updateStats();toast("User dihapus.");syncNow(true)}
+function changeAdmin(){const value=newAdmin.value.trim();if(value.length<5){toast("Kode minimal 5 karakter.");return}adminCode=value;localStorage.setItem("warzt_admin",adminCode);newAdmin.value="";toast("Kode admin berhasil diubah.");syncNow(true)}
+function saveNotice(){notice=noticeText.value.trim();save();toast("Pengumuman diterbitkan.");syncNow(true)}
+function adminTab(name,button){["adminUsers","adminCreate","adminNotice","adminSecurity","adminBackup","adminCloud"].forEach(id=>document.getElementById(id).classList.add("hidden"));document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));button.classList.add("active");document.getElementById({users:"adminUsers",create:"adminCreate",notice:"adminNotice",security:"adminSecurity",backup:"adminBackup",cloud:"adminCloud"}[name]).classList.remove("hidden");if(name==="users")renderUsers();if(name==="cloud"){apiUrl.value=cloud.url;cloudKey.value=cloud.key}}
+function updateStats(){if(!sUsers)return;const active=users.filter(u=>!u.disabled&&(u.expires===0||Date.now()<u.expires)).length;const copies=prompts.reduce((s,p)=>s+(p.copies||0),0);sUsers.textContent=users.length;sActive.textContent=active;sPrompts.textContent=prompts.length;sCopies.textContent=copies}
+function backup(){const blob=new Blob([JSON.stringify(payload(),null,2)],{type:"application/json"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="warzt-promt-backup.json";a.click();URL.revokeObjectURL(url);toast("Backup lokal dibuat.")}
+function restore(event){const file=event.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{applyData(JSON.parse(e.target.result));toast("Data berhasil dipulihkan.");syncNow(true)}catch{toast("File backup tidak valid.")}};r.readAsText(file)}
+function saveCloudConfig(){cloud.url=apiUrl.value.trim().replace(/\/+$/,"");cloud.key=cloudKey.value.trim();localStorage.setItem(API_URL_NAME,cloud.url);localStorage.setItem(API_KEY_NAME,cloud.key);updateCloudUI();toast("Konfigurasi cloud disimpan.")}
+function updateCloudUI(){const ok=!!cloud.url;syncIndicator.className="sync-dot "+(ok?"sync-ok":"");syncText.textContent=ok?"Cloud endpoint siap digunakan.":"Cloud sync belum dikonfigurasi."}
+async function api(path,body){if(!cloud.url)throw Error("API belum dikonfigurasi");const r=await fetch(cloud.url+path,{method:"POST",headers:{"Content-Type":"application/json","X-WARZT-KEY":cloud.key},body:JSON.stringify(body)});const d=await r.json().catch(()=>({}));if(!r.ok||d.ok===false)throw Error(d.error||"Request gagal");return d}
+async function testCloud(){saveCloudConfig();try{const d=await api("/health",{client:"warzt-promt"});toast(d.ok?"Koneksi berhasil.":"Koneksi gagal.")}catch(e){toast("Koneksi gagal: "+e.message)}}
+async function syncNow(silent=false){if(currentUser!=="ADMIN"||!cloud.url){if(!silent)toast("Cloud belum dikonfigurasi.");return}try{await api("/sync",payload());localStorage.setItem("warzt_last_sync",Date.now());updateCloudUI();if(!silent)toast("Data tersinkron ke Telegram.")}catch(e){if(!silent)toast("Sync gagal: "+e.message)}}
+async function pullNow(){if(currentUser!=="ADMIN"){toast("Hanya admin.");return}try{const d=await api("/pull",{});applyData(d.data);localStorage.setItem("warzt_last_sync",Date.now());toast("Data cloud berhasil diambil.")}catch(e){toast("Pull gagal: "+e.message)}}
+function openModal(id){document.getElementById(id).classList.add("show")}function closeModal(id){document.getElementById(id).classList.remove("show")}
+function dateFmt(t){return new Date(t).toLocaleDateString("id-ID",{day:"2-digit",month:"2-digit",year:"numeric"})}
+function escapeHTML(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function safeURL(v){return /^data:image\/(png|jpe?g|webp|gif);base64,/i.test(v)?v:""}
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),2400)}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal").forEach(x=>x.classList.remove("show"))})
+const toastEl=document.getElementById("toast");
+if(!prompts.length){prompts=[{id:"demo1",title:"Cinematic Portrait",category:"Photography",tags:"cinematic,portrait,4k",positive:"Ultra realistic cinematic portrait, natural skin texture, professional photography, dramatic lighting, detailed face, realistic eyes, shallow depth of field, film look, 4K.",negative:"blurry, low quality, distorted face, bad anatomy, extra fingers, deformed hands, oversaturated",image:"",favorite:false,copies:0,created:Date.now()},{id:"demo2",title:"Couple 1980s Indonesia",category:"Couple",tags:"80s,vintage,couple",positive:"Authentic Indonesian couple portrait from the 1980s, analog 35mm film photography, vintage clothing, natural pose, warm film grain, realistic skin tones, nostalgic atmosphere.",negative:"modern clothing, modern car, futuristic objects, plastic skin, CGI, cartoon, distorted face",image:"",favorite:false,copies:0,created:Date.now()}];save()}
+restoreSession();
+</script>
+</body>
+</html>
